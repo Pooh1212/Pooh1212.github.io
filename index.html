@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>เว็บแฟนน่ารักๆ 💖</title>
+<link href="https://fonts.googleapis.com/css2?family=Mali:wght@300;400;600&display=swap" rel="stylesheet" />
+<style>
+body {
+    font-family: 'Mali', cursive;
+    margin: 0;
+    color: #333;
+    overflow-x: hidden;
+}
+header {
+    text-align: center;
+    padding: 50px 20px;
+    background: linear-gradient(135deg, #ff9acb, #ffb6d9);
+    color: white;
+    font-size: 2.8rem;
+    font-weight: 900;
+    border-bottom-left-radius: 30px;
+    border-bottom-right-radius: 30px;
+    letter-spacing: 2px;
+    box-shadow: 0 8px 20px rgba(255, 140, 180, 0.4);
+    position: relative;
+    text-shadow: 2px 2px 6px rgba(255,255,255,0.6), 0 0 10px rgba(255,182,217,0.5);
+    animation: pulse 2s infinite alternate;
+    overflow: hidden;
+}
+@keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.05); } 100% { transform: scale(1); } }
+.header-heart { position: absolute; font-size: 2.5rem; opacity: 0.7; animation: floatHeart 3s linear infinite; }
+@keyframes floatHeart { 0% { transform: translateY(0) scale(1); opacity:0.7; } 50% { transform: translateY(-15px) scale(1.2); opacity:1; } 100% { transform: translateY(0) scale(1); opacity:0.7; } }
+
+.menu {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin: 30px auto;
+    width: 90%;
+    max-width: 450px;
+}
+.menu a {
+    text-decoration: none;
+    background: linear-gradient(135deg, #ff9acb, #ffb6d9);
+    padding: 18px;
+    border-radius: 25px;
+    text-align: center;
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: white;
+    border: 2px solid #ff85b5;
+    box-shadow: 0 6px 15px rgba(255,140,180,0.4);
+    transition: all 0.3s ease;
+}
+.menu a:hover {
+    transform: scale(1.08) rotate(-1deg);
+    box-shadow: 0 8px 20px rgba(255,140,180,0.5);
+    background: linear-gradient(135deg, #ffb6d9, #ffc0dd);
+}
+
+.page { display: none; padding: 30px; max-width: 700px; margin: auto; }
+.page h2 { color: #ff6fa8; text-align: center; margin-bottom: 20px; }
+
+.back-btn {
+    display: block;
+    text-align: center;
+    margin: 30px auto 0;
+    padding: 12px 20px;
+    background: linear-gradient(135deg, #ff9acb, #ffb6d9);
+    color: white;
+    border-radius: 25px;
+    font-weight: 700;
+    text-decoration: none;
+    box-shadow: 0 6px 15px rgba(255,140,180,0.4);
+    transition: all 0.3s ease;
+}
+.back-btn:hover {
+    transform: scale(1.05) rotate(-1deg);
+    box-shadow: 0 8px 20px rgba(255,140,180,0.5);
+    background: linear-gradient(135deg, #ffb6d9, #ffc0dd);
+}
+
+#musicBtn {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    padding: 12px 18px;
+    background: linear-gradient(135deg, #ff9acb, #ffb6d9);
+    color: white;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    font-size: 1.1rem;
+    font-weight: 700;
+    box-shadow: 0 6px 15px rgba(255,140,180,0.4);
+    transition: all 0.3s ease;
+}
+#musicBtn:hover {
+    transform: scale(1.05) rotate(-2deg);
+    box-shadow: 0 8px 20px rgba(255,140,180,0.5);
+    background: linear-gradient(135deg, #ffb6d9, #ffc0dd);
+}
+
+.hearts { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; overflow: hidden; z-index: 0; }
+.heart { position: absolute; width: 20px; height: 20px; background: rgba(255,182,217,0.4); transform: rotate(45deg); animation: float 6s linear infinite; }
+.heart:before, .heart:after { content:""; position:absolute; width:20px; height:20px; background:rgba(255,182,217,0.4); border-radius:50%; }
+.heart:before { top:-10px; left:0; } .heart:after { left:-10px; top:0; }
+@keyframes float { 0% { transform: translateY(100vh) rotate(45deg); } 100% { transform: translateY(-20vh) rotate(45deg); } }
+
+.counter-card { background: rgba(255,255,255,0.9); padding: 22px; border-radius: 18px; box-shadow: 0 6px 18px rgba(0,0,0,0.06); text-align: center; }
+.counter-card .since { color: #ff6fa8; margin-bottom: 8px; }
+.time-large { font-size: 1.4rem; font-weight: 700; color: #ff4d93; margin-top: 8px; }
+.time-small { font-size: 1.2rem; margin-top: 6px; color: #ff6fa8; }
+.total-days { margin-top: 10px; color: #ff85b5; font-weight: 600; }
+
+/* รูปถ่ายความทรงจำ */
+#photoGallery, #giftGallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px,1fr));
+    gap: 15px;
+    margin-top: 20px;
+    padding: 20px;
+    background: linear-gradient(135deg, #ffe3f2, #ffc0dd);
+    border-radius: 25px;
+    text-align: center;
+    box-shadow: 0 6px 15px rgba(255,140,180,0.3);
+}
+#photoGallery img, #giftGallery img {
+    width: 100%;
+    border-radius: 25px;
+    box-shadow: 0 6px 18px rgba(255,182,217,0.4);
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+#photoGallery img:hover, #giftGallery img:hover {
+    transform: scale(1.05);
+    box-shadow: 0 10px 25px rgba(255,182,217,0.6);
+}
+
+.story-content { background: rgba(255,230,245,0.8); padding: 20px; border-radius: 15px; box-shadow:0 4px 12px rgba(255,182,217,0.3); line-height:1.6; font-size:1.1rem; color:#ff4d93; text-align:center; animation: fadeIn 2s ease-in-out; }
+@keyframes fadeIn { from {opacity:0; transform:translateY(20px);} to {opacity:1; transform:translateY(0);} }
+</style>
+</head>
+<body>
+<audio id="bgMusic" autoplay loop>
+    <source src="Morvasu x Violette Wautier -  home Official Performance Video.mp3" type="audio/mpeg">
+</audio>
+<button id="musicBtn" onclick="toggleMusic()">🎵 เล่น/หยุดเพลง</button>
+
+<div class="hearts">
+    <div class="heart" style="left:10%; animation-duration:7s;"></div>
+    <div class="heart" style="left:30%; animation-duration:9s;"></div>
+    <div class="heart" style="left:50%; animation-duration:6s;"></div>
+    <div class="heart" style="left:70%; animation-duration:8s;"></div>
+    <div class="heart" style="left:90%; animation-duration:10s;"></div>
+</div>
+
+<header>
+    สำหรับแฟนน่ารักของเค้า 💗
+    <span class="header-heart" style="left:20%; top:20%;">💖</span>
+    <span class="header-heart" style="left:80%; top:25%; animation-delay:0.5s">💖</span>
+</header>
+<br>
+<br>
+<div class="menu" id="menu">
+    <a href="#" onclick="openPage('time')">⏳ เวลาที่คบกัน</a>
+    <a href="#" onclick="openPage('photos')">📸 รูปถ่ายความทรงจำ</a>
+    <a href="#" onclick="openPage('gifts')">🎁 ของที่แฟนเคยให้</a>
+    <a href="#" onclick="openPage('story')">💌 ? </a>
+</div>
+
+<div id="time" class="page">
+    <h2>⏳ เวลาที่คบกัน</h2>
+    <div class="counter-card">
+        <div class="since">เริ่มเมื่อ: <span id="startDateText">2025-09-16</span></div>
+        <div class="time-large">
+            <span id="years">0</span> ปี
+            <span id="months">0</span> เดือน
+            <span id="days">0</span> วัน
+        </div>
+        <div class="time-small">
+            <span id="hours">00</span> : <span id="minutes">00</span> : <span id="seconds">00</span>
+        </div>
+        <div class="total-days">รวม <span id="totalDays">0</span> วัน</div>
+        <a class="back-btn" href="#" onclick="goBack()">กลับ</a>
+    </div>
+</div>
+
+<div id="photos" class="page">
+    <h2>📸 รูปถ่ายความทรงจำ</h2>
+    <div id="photoGallery">
+        <img src="10.jpg" alt="ความทรงจำ 1">
+        <img src="9.jpg" alt="ความทรงจำ 2">
+        <img src="8.jpg" alt="ความทรงจำ 3">
+        <img src="5.jpg" alt="ความทรงจำ 4">
+        <img src="6.jpg" alt="ความทรงจำ 4">
+        <img src="7.jpg" alt="ความทรงจำ 4">
+        <img src="4.jpg" alt="ความทรงจำ 4">
+        <img src="3.jpg" alt="ความทรงจำ 4">
+        <img src="2.jpg" alt="ความทรงจำ 4">
+        <img src="1.jpg" alt="ความทรงจำ 4">
+        <img src="IMG_1560.JPG" alt="ความทรงจำ 4">
+        <img src="11.jpg" alt="ความทรงจำ 4">
+        <img src="12.jpg" alt="ความทรงจำ 4">
+        <img src="13.jpg" alt="ความทรงจำ 4">
+    </div>
+    <a class="back-btn" href="#" onclick="goBack()">กลับ</a>
+</div>
+
+<div id="gifts" class="page">
+    <h2>🎁 ของที่แฟนเคยให้</h2>
+    <div id="giftGallery">
+        <img src="14.jpg" alt="ของขวัญ 1">
+        <img src="15.jpg" alt="ของขวัญ 2">
+        <img src="16.jpg" alt="ของขวัญ 3">
+        <img src="17.jpg" alt="ของขวัญ 4">
+        <img src="18.jpg" alt="ของขวัญ 4">
+        <img src="19.jpg" alt="ของขวัญ 4">
+        <img src="20.jpg" alt="ของขวัญ 4">
+    </div>
+    <a class="back-btn" href="#" onclick="goBack()">กลับ</a>
+</div>
+
+<div id="story" class="page">
+    <h2>💌 ? </h2>
+    <div class="story-content">
+        ทุกวันที่เค้าตื่นมาก็นึกถึงเธอเป็นคนเเรกเพราะอะไร <br>
+        เพราะในสมองเค้ามันมีเเต่เธอถึงเเม้เค้าจะเอ๋อหน่อยเเต่เค้าก็รักเธอมากที่สุดเลยนะ<br>
+        บางทีที่พูดไม่ดีหรือทำอะไรผิดไปก็ขอโอกาสให้เค้าเเก้ตัวนะครับ<br>
+        เพราะเค้ายังอยากจะอยุ้ดูเเลเธอไปจนโตไม่อยากปล่อยมือเธอไปไหน <br>
+        ขอบคุณนะครับที่คอยเตือนหรือว่าอะไรเวลาเค้าทำอะไรไม่ดี<br>
+        เธอก็ต้องมีเหนื่อยบ้างเเหละ<br>
+        เค้าจะอยุ่ข้างเธอในวันที่เธอเหนื่อยเสมอจะคอยโตไปด้วยกัน รักนะครับ 
+    </div>
+    <a class="back-btn" href="#" onclick="goBack()">กลับ</a>
+</div>
+
+<script>
+function openPage(pageId){
+    document.getElementById('menu').style.display='none';
+    document.querySelectorAll('.page').forEach(p=>p.style.display='none');
+    document.getElementById(pageId).style.display='block';
+}
+function goBack(){
+    document.querySelectorAll('.page').forEach(p=>p.style.display='none');
+    document.getElementById('menu').style.display='flex';
+}
+
+const startDate = new Date('2025-09-16T00:00:00');
+function pad(n){return n<10?('0'+n):n;}
+function updateCounter(){
+    const now = new Date();
+    let diff = Math.floor((now - startDate)/1000);
+    if(diff<0) diff=0;
+    const seconds = diff%60;
+    const minutes = Math.floor(diff/60)%60;
+    const hours = Math.floor(diff/3600)%24;
+    const totalDays = Math.floor(diff/86400);
+    const years = Math.floor(totalDays/365);
+    const months = Math.floor((totalDays%365)/30);
+    const days = totalDays-(years*365)-(months*30);
+    document.getElementById('years').textContent=years;
+    document.getElementById('months').textContent=months;
+    document.getElementById('days').textContent=days;
+    document.getElementById('hours').textContent=pad(hours);
+    document.getElementById('minutes').textContent=pad(minutes);
+    document.getElementById('seconds').textContent=pad(seconds);
+    document.getElementById('totalDays').textContent=totalDays;
+}
+document.addEventListener('DOMContentLoaded',()=>{updateCounter(); setInterval(updateCounter,1000);});
+
+const bgMusic=document.getElementById('bgMusic');
+function toggleMusic(){
+    if(bgMusic.paused){ bgMusic.play(); } 
+    else { bgMusic.pause(); }
+}
+
+// คลิกโผล่หัวใจ
+document.body.addEventListener('click', function(e){
+    const heart=document.createElement('div');
+    heart.textContent='💖';
+    heart.style.position='absolute';
+    heart.style.left=e.pageX-10+'px';
+    heart.style.top=e.pageY-10+'px';
+    heart.style.fontSize='20px';
+    heart.style.pointerEvents='none';
+    heart.style.animation='floatHeart 1s ease-out';
+    document.body.appendChild(heart);
+    setTimeout(()=>heart.remove(),1000);
+});
+</script>
+<!-- ส่วน CSS เพิ่มสำหรับ lightbox -->
+<style>
+/* overlay สำหรับ lightbox */
+#lightboxOverlay {
+    position: fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background: rgba(0,0,0,0.7);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
+#lightboxOverlay img {
+    max-width: 90%;
+    max-height: 90%;
+    border-radius: 25px;
+    box-shadow: 0 10px 25px rgba(255,182,217,0.8);
+    transition: transform 0.3s;
+}
+#lightboxOverlay img:hover { transform: scale(1.02); cursor: zoom-out; }
+</style>
+
+<!-- เพิ่ม div overlay ไว้ข้าง body -->
+<div id="lightboxOverlay">
+    <img id="lightboxImage" src="">
+</div>
+
+<script>
+// ฟังก์ชันสำหรับคลิกรูปเปิด lightbox
+function setupLightbox(galleryId){
+    const gallery = document.getElementById(galleryId);
+    const lightboxOverlay = document.getElementById('lightboxOverlay');
+    const lightboxImage = document.getElementById('lightboxImage');
+
+    gallery.querySelectorAll('img').forEach(img=>{
+        img.style.cursor = 'pointer';
+        img.addEventListener('click', ()=>{
+            lightboxImage.src = img.src;
+            lightboxOverlay.style.display = 'flex';
+        });
+    });
+
+    // คลิกที่ overlay หรือรูปภาพเพื่อปิด
+    lightboxOverlay.addEventListener('click', ()=>{
+        lightboxOverlay.style.display = 'none';
+    });
+}
+
+// เรียกใช้กับ gallery ทั้งสอง
+setupLightbox('photoGallery');
+setupLightbox('giftGallery');
+</script>
+</body>
+</html>
